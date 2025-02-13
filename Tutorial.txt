@@ -1,0 +1,8 @@
+Example Flow:
+
+User enters circle, red, and 23 as inputs.
+A Circle object is created: new Circle("red", 0, 0, 23).
+This object is added to ArrayList<Shape> shapes.
+Later, when iterating over the list:
+calculateArea() is called → Calls Circle's overridden method → Returns Math.PI * radius * radius.
+calculatePrice() is called → Calls Circle's overridden method → Applies a 1.5 multiplier since the color is red.
