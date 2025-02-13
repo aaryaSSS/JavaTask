@@ -1,8 +1,64 @@
 Example Flow:
 
+High Level:
 User enters circle, red, and 23 as inputs.
 A Circle object is created: new Circle("red", 0, 0, 23).
 This object is added to ArrayList<Shape> shapes.
 Later, when iterating over the list:
 calculateArea() is called → Calls Circle's overridden method → Returns Math.PI * radius * radius.
 calculatePrice() is called → Calls Circle's overridden method → Applies a 1.5 multiplier since the color is red.
+
+
+More specifically:
+
+1. User Input Phase
+Example:
+Enter shape (circle/rectangle/exit): circle  
+Enter color: red  
+Enter radius: 10  
+
+
+2. Shape Creation Phase
+Source: ShapeFactory.createShape()
+Data Flow:
+The Main class passes the collected input to ShapeFactory.createShape() method.
+This method:
+Validates Input: Checks if the input is a number for dimensions.
+Creates Object: Constructs an object of the appropriate subclass (Circle or Rectangle).
+Example:
+The data from the previous phase is passed as arguments:
+Shape shape = ShapeFactory.createShape("circle", "red", scanner);
+ShapeFactory then creates a Circle object:
+return new Circle("red", 0, 0, 10);
+Object Created:
+Circle { color: red, x: 0, y: 0, radius: 10 }
+
+
+3. Data Storage Phase
+Source: ArrayList<Shape> shapes in Main.java
+Data Flow:
+The newly created Circle object is stored in an ArrayList:
+shapes.add(new Circle("red", 0, 0, 10));
+This allows multiple shapes to be saved for processing after all inputs are complete.
+Example:
+If another rectangle is added:
+shapes = [
+    Circle { color: red, radius: 10 },
+    Rectangle { color: blue, width: 5, height: 10 }
+];
+
+
+4. Calculation Phase
+Source: calculateAndDisplayResults() in Main.java
+Data Flow:
+The program iterates over the shapes list.
+Dynamic Method Dispatch:
+Calls calculateArea() and calculatePrice() methods.
+The correct method for each shape is executed due to polymorphism.
+
+
+5. Output Phase
+Source: LOGGER.info() in calculateAndDisplayResults()
+Data Flow:
+The calculated area and price are formatted as strings and logged using Logger.
+Output is displayed to the console.
