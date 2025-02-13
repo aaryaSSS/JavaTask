@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
-            // Polymorphism: ArrayList<Shape> can store any Shape subclass
             ArrayList<Shape> shapes = new ArrayList<>();
 
             while (true) {
@@ -25,20 +24,20 @@ public class Main {
                 if (shape.equals("circle")) {
                     System.out.println("Enter radius:");
                     double radius = scanner.nextDouble();
+                    scanner.nextLine(); // Consume the leftover newline
                     shapes.add(new Circle(color, 0, 0, radius));
                 } else if (shape.equals("rectangle")) {
                     System.out.println("Enter width and height:");
                     double width = scanner.nextDouble();
                     double height = scanner.nextDouble();
+                    scanner.nextLine(); // Consume the leftover newline
                     shapes.add(new Rectangle(color, 0, 0, width, height));
                 }
-                scanner.nextLine();
             }
 
-            // Polymorphism: Correct version of calculateArea/Price called based on actual object type
-            for (Shape shape : shapes) {
+            for (Shape shapeObj : shapes) {
                 LOGGER.info(String.format("%s shape - Area: %.2f, Price: $%.2f",
-                        shape.getColor(), shape.calculateArea(), shape.calculatePrice()));
+                        shapeObj.getColor(), shapeObj.calculateArea(), shapeObj.calculatePrice()));
             }
 
         } catch (Exception e) {
